@@ -24,7 +24,7 @@ page-layout: article
 
   // Your Firebase web config
   const firebaseConfig = {
-    apiKey: "AIzaSyC0zB_NRY9ySj9vopUXiqHECtrQDNKlLBs",
+    apiKey: "",
     authDomain: "fig-1-41cec.firebaseapp.com",
     databaseURL: "https://fig-1-41cec-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "fig-1-41cec",
