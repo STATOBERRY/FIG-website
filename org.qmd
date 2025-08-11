@@ -1,0 +1,104 @@
+---
+title: "Farmer"
+page-layout: article
+---
+
+<div class="fig-card">
+  <h2 id="farmer-title">Farmer</h2>
+  <div id="farmer-meta" class="muted small"></div>
+  <div id="farmer-content">Loading…</div>
+</div>
+
+<style>
+  .fig-card{max-width:900px;margin:0 auto;background:#fff;border-radius:12px;
+            box-shadow:0 6px 16px rgba(0,0,0,.08);padding:20px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+  .muted{color:#666}.small{font-size:.9rem}
+  img.thumb{max-width:100%;border-radius:10px;border:1px solid #e6e6e6}
+  .box{border:1px solid #ddd;border-radius:10px;padding:12px}
+</style>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  // Your Firebase web config
+  const firebaseConfig = {
+    apiKey: "AIzaSyC0zB_NRY9ySj9vopUXiqHECtrQDNKlLBs",
+    authDomain: "fig-1-41cec.firebaseapp.com",
+    databaseURL: "https://fig-1-41cec-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "fig-1-41cec",
+    storageBucket: "fig-1-41cec.firebasestorage.app",
+    appId: "1:445762520559:web:97e2259da18c649b99a21a"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getDatabase(app);
+
+  const params = new URLSearchParams(location.search);
+  const figId  = params.get("fig_id");
+  const title  = document.getElementById("farmer-title");
+  const meta   = document.getElementById("farmer-meta");
+  const mount  = document.getElementById("farmer-content");
+
+  if(!figId){ mount.textContent = "Missing fig_id in URL."; throw new Error("no fig_id"); }
+
+  (async () => {
+    // 1) Public farmer profile
+    const pfSnap = await get(child(ref(db), `public/farmers/${figId}`));
+    if(!pfSnap.exists()){ mount.innerHTML = `<p>No public profile for <code>${figId}</code>.</p>`; return; }
+    const pf = pfSnap.val();
+
+    title.textContent = pf.farmer_name || figId;
+    meta.textContent = `FIG ID: ${figId} ${pf.verification ? "• " + pf.verification : ""}`;
+
+    // 2) Public entries for this farmer
+    const entSnap = await get(child(ref(db), `public/traces/${figId}/entries`));
+    const ents = entSnap.exists() ? entSnap.val() : {};
+
+    // Build page
+    mount.innerHTML = `
+      <div class="grid">
+        <div class="box">
+          <b>Farmer</b><br>${pf.farmer_name || "-"}<br><span class="muted small">${figId}</span>
+        </div>
+        <div class="box"><b>Org</b><br>${pf.org_id || "-"}</div>
+        <div class="box"><b>Updated</b><br>${pf.updated_at || "-"}</div>
+      </div>
+      <div class="grid" style="margin-top:12px">
+        <div class="box">
+          <b>Farmer Photo</b><br>
+          ${pf.photo_farmer ? `<img class="thumb" src="${pf.photo_farmer}" alt="farmer photo">` : "<span class='muted'>—</span>"}
+        </div>
+        <div class="box">
+          <b>Farm Photo</b><br>
+          ${pf.photo_farm ? `<img class="thumb" src="${pf.photo_farm}" alt="farm photo">` : "<span class='muted'>—</span>"}
+        </div>
+      </div>
+      <h3 style="margin-top:16px">Entries</h3>
+      ${
+        Object.keys(ents).length
+        ? `<div class="grid">${
+            Object.entries(ents)
+              .sort((a,b)=> (b[1].created_at||"").localeCompare(a[1].created_at||""))
+              .map(([k,e]) => `
+                <div class="box">
+                  <div><b>${e.batch_id||k}</b> — ${e.crop||""}</div>
+                  <div class="small muted">Harvest: ${e.harvest_date || "-"}</div>
+                  <div class="small muted">Variety: ${e.variety || "-"}</div>
+                  ${
+                    e.batch_id
+                    ? `<div style="margin-top:8px">
+                         <a class="button" href="trace.html?batch_id=${encodeURIComponent(e.batch_id)}">View trace</a>
+                       </div>` : ""
+                  }
+                </div>`).join("")
+          }</div>`
+        : `<p class="muted">No entries published yet.</p>`
+      }
+    `;
+  })().catch(err => {
+    console.error(err);
+    mount.innerHTML = "<p style='color:#b00020'>Failed to load farmer page.</p>";
+  });
+</script>
