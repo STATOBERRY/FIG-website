@@ -1,5 +1,12 @@
 project:
   type: website
+  output-dir: docs
+  resources: 
+    - "*.png"
+    - "*.jpeg"
+    - "*.svg"
+    - "*.pdf"
+    - CNAME
 website:
   title: "FIG — Farm In Grid"
   navbar:
