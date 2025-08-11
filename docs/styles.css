@@ -1,0 +1,114 @@
+/* Remove space above banner */
+body, .navbar, .banner {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Full-bleed banner container */
+.banner-container {
+  position: relative;
+  width: 100%;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  max-width: 100vw; /* prevent overflow */
+  overflow: hidden;
+}
+
+/* Banner fade-out on scroll */
+.banner {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: sticky;       /* stays in place until scrolled past */
+  top: 0;
+  z-index: 1;
+  animation: fadeBanner linear both;
+  animation-timeline: scroll();
+  animation-range: 0 300px; /* adjust scroll distance before fully faded */
+}
+
+@keyframes fadeBanner {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Remove default figure margins if banner is first element */
+.quarto-figure:first-child,
+figure:first-child {
+  margin: 0 !important;
+}
+
+/* Prevent horizontal scrollbars */
+html, body {
+  overflow-x: hidden;
+}
+/* remove container padding so the bleed touches edges */
+#quarto-content .content {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* kill figure margins when first element */
+.quarto-figure:first-child, figure:first-child { margin: 0 !important; }
+
+/* full-bleed banner (no side gaps, no horizontal scroll) */
+.banner {
+  display: block;
+  inline-size: 100vw;              /* width */
+  max-inline-size: 100vw;
+  margin-inline: calc(50% - 50vw); /* bleed both sides */
+  height: auto;
+}
+
+
+/* Make marquee directly under banner */
+.marquee-container {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: #e0f7fa;
+  border-top: 2px solid #009688;
+  border-bottom: 2px solid #009688;
+  padding: 5px 0;
+  overflow: hidden;
+  margin-top: 0 !important;  /* Remove any gap from banner */
+}
+
+/* Marquee text */
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #004d40;
+  padding-left: 100%;
+  animation: slide-left 40s linear infinite; /* Slower speed */
+}
+
+/* Scroll animation */
+@keyframes slide-left {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Pause scroll on hover */
+.marquee-content:hover {
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+/* Kill bottom margin from the banner wrapper */
+.banner,
+.banner-container,
+.quarto-figure,
+figure,
+p:has(.banner) {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+/* COMMON NEEDED*/

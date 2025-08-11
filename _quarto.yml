@@ -8,8 +8,12 @@ project:
     - "*.pdf"
     - CNAME
 website:
-  title: "FIG — Farm In Grid"
+  title: "FIG-Farm In Grid"
+  favicon: www/logo.png
   navbar:
+    background: "#015c18"
+    logo: www/logo.png
+    search: true
     left:
       - text: Home
         href: index.qmd
@@ -17,7 +21,40 @@ website:
         href: org.qmd
       - text: Trace
         href: trace.qmd
+  page-footer:
+    left: |
+      © 2025 RAISINS by <a href="https://www.statoberry.com/">Statoberry LLP</a><br>
+      <img src="www/statologo.png" alt="Statoberry Logo" style="height:25px; padding: 5px 10px 5px 10px; margin-bottom: 5px;">
+    center:
+      - icon: youtube
+        href: https://www.youtube.com/@statoberry
+      - icon: facebook
+        href: https://facebook.com/statoberry
+      - icon: twitter
+        href: https://twitter.com/statoberry
+      - icon: linkedin
+        href: https://linkedin.com/company/statoberry
+      - icon: instagram
+        href: https://instagram.com/statoberry
+    background: "#f0ddef"
 format:
   html:
-    theme: cosmo
-    css: styles.css
+    theme:
+      light:
+        - cosmo
+      dark:
+        - slate
+    css: styles.css 
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    smooth-scroll: true
+    code-tools: false
+    page-layout: full
+    lightbox: true
+
+execute:
+  freeze: auto
+  echo: false
+
+editor: visual
