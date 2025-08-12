@@ -5,7 +5,7 @@ editor: visual
 toc: false
 ---
 
-![](images/banner.webp){.banner}
+![](images/video.mp4){.banner}
 
 :::: marquee-container
 ::: marquee-content
@@ -205,21 +205,20 @@ toc: false
   }
 
   /* side-by-side on larger screens */
-  @media (min-width: 768px) {
-    .fig-layout {
-      flex-direction: row;
-      align-items: stretch;
-    }
-    .fig-image {
-      flex: 0 0 40%;
-    }
-    .fig-text {
-      flex: 0 0 60%;
-    }
-    .fig-image img {
-      height: 100%;
-      object-fit: cover;
-    }
+@media (min-width: 768px) {
+  .fig-layout {
+    flex-direction: row-reverse; /* Image will now appear on the right */
+    align-items: stretch;
+  }
+  .fig-image {
+    flex: 0 0 40%;
+  }
+  .fig-text {
+    flex: 0 0 60%;
+  }
+  .fig-image img {
+    height: 100%;
+    object-fit: cover;
   }
 
   /* existing fig-card styles */
