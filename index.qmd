@@ -5,7 +5,7 @@ editor: visual
 toc: false
 ---
 
-![](images/video.mp4){.banner}
+![](images/banner.webp){.banner}
 
 :::: marquee-container
 ::: marquee-content
