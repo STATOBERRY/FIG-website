@@ -69,17 +69,11 @@ ul.task-list li input[type="checkbox"] {
     position: fixed; left: 50%; transform: translateX(-50%);
     bottom: 24px; z-index: 30;
   }
-  .locate-btn {
-    background: #111827; color: #fff; border: none;
-    padding: 10px 14px; border-radius: 999px; font-size: 14px;
-    box-shadow: 0 6px 18px rgba(0,0,0,.18); cursor: pointer;
-  }
-  .locate-btn:active { transform: translateX(-50%) scale(0.98); }
 
   /* fab */
   .fab-container { position: fixed; bottom: 20px; right: 20px; z-index: 20; }
   .fab-button {
-    background-color: #634360; color: #fff; width: 50px; height: 50px;
+    background-color: #edfad9; color: #fff; width: 50px; height: 50px;
     border-radius: 50%; text-align: center; font-size: 24px; line-height: 50px;
     cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: background-color .3s;
   }
@@ -102,14 +96,9 @@ ul.task-list li input[type="checkbox"] {
 <iframe id="kifFrame" src="https://statoberry-kif-registration.share.connect.posit.cloud/" allow="geolocation; clipboard-read; clipboard-write" referrerpolicy="origin-when-cross-origin" loading="eager" onload="document.getElementById('loader').style.display='none';">
 </iframe>
 
-<!-- parent-level locate button (required for iOS/strict mobile) -->
-<div class="locate-wrap">
-  <button class="locate-btn" onclick="parentLocate()">📍 Use my location</button>
-</div>
-
 <!-- fab -->
 <div class="fab-container">
-  <div class="fab-button" onclick="toggleFAB()">⬆️</div>
+  <div class="fab-button" onclick="toggleFAB()">🔙</div>
   <a href="index.html" class="fab-home" id="fabHome" title="Go to home">🏠 Home</a>
 </div>
 
