@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -32,8 +32,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-html-5276476b5bdb9cfe1f92c505466e0bf3.min.css" rel="stylesheet" append-hash="true" data-mode="light">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <style>html{ scroll-behavior: smooth; }</style>
 
 
@@ -56,95 +56,80 @@ ul.task-list li input[type="checkbox"] {
     font-family: Arial, sans-serif;
   }
 
-#loader {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: white;
-display: flex;
-justify-content: center;
-align-items: flex-start;
-padding-top: 2rem;
-z-index: 10;
-}
+  #loader {
+    position: fixed;
+    inset: 0;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2rem;
+    z-index: 10;
+  }
 
-#loader img {
-width: 60vw;  /* or 70vw if you want it even bigger */
-  max-width: 600px; /* fallback max size */
-  height: auto;
-}
+  #loader img {
+    width: 60vw;
+    max-width: 600px;
+    height: auto;
+  }
 
-iframe {
-  border: none;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
+  iframe {
+    border: none;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+  }
 
-/* FAB Styles */
+  /* fab styles */
   .fab-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 999;
+    z-index: 20;
   }
-
-.fab-button {
-  background-color: #634360;
+  .fab-button {
+    background-color: #634360;
     color: #fff;
-    width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 24px;
-  line-height: 50px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
-}
-
-.fab-button:hover {
-  background-color: #452d45;
-}
-
-.fab-home {
-  display: none;
-  position: absolute;
-  bottom: 60px;
-  right: 5px;
-  background-color: #ecf0f1;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 24px;
+    line-height: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+  }
+  .fab-button:hover { background-color: #452d45; }
+  .fab-home {
+    display: none;
+    position: absolute;
+    bottom: 60px; right: 5px;
+    background-color: #ecf0f1;
     color: #634360;
     padding: 8px 12px;
-  border-radius: 20px;
-  font-size: 14px;
-  text-decoration: none;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-  transition: all 0.3s ease;
-}
+    border-radius: 20px;
+    font-size: 14px;
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+  }
+  .fab-home.show { display: inline-block; }
 
-.fab-home.show {
-  display: inline-block;
-}
+  /* small screens: ensure iframe fills viewport */
+  @media (max-width: 768px) {
+    iframe { height: 100svh; }
+  }
 </style>
-<div id="loader">
-<p><img src="https://firebasestorage.googleapis.com/v0/b/fig-1-41cec.firebasestorage.app/o/kifregloader.gif?alt=media" alt="Loading..."></p>
-</div>
-<iframe src="https://statoberry-kif-registration.share.connect.posit.cloud/" onload="document.getElementById('loader').style.display='none';">
+
+<iframe src="https://statoberry-kif-registration.share.connect.posit.cloud/" allow="geolocation; clipboard-read; clipboard-write" referrerpolicy="origin-when-cross-origin" loading="eager" onload="document.getElementById('loader').style.display='none';">
 </iframe>
-<div class="fab-container">
-<div class="fab-button" onclick="toggleFAB()">
-<p>⬆️</p>
-</div>
-<p><a href="index.html" class="fab-home" id="fabHome" title="Go to Home">🏠 Home</a></p>
-</div>
-      <script>
-        function toggleFAB() {
-          const homeBtn = document.getElementById("fabHome");
-          homeBtn.classList.toggle("show");
-        }
-      </script>
+<script>
+  // toggle home chip
+  function toggleFAB() {
+    const homeBtn = document.getElementById("fabHome");
+    homeBtn.classList.toggle("show");
+  }
+</script>
 
 
 <script id="quarto-html-after-body" type="application/javascript">
@@ -233,8 +218,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -345,7 +328,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
